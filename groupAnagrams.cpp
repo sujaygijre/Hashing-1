@@ -8,23 +8,22 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        
-        vector<vector<string>> answer;
-        
-        unordered_map<string,vector<string>> um;
-        
-        for(int i=0;i<strs.size();i++)
+        unordered_map<string, vector<string>> um;
+
+        for (auto str : strs)
         {
-            string s=strs[i];
-            sort(s.begin(),s.end()); //sort each string 
-            um[s].push_back(strs[i]);// store the sorted string as key and push the normal string in the vector
+            string temp = str;
+            sort(temp.begin(), temp.end());
+            um[temp].push_back(str);
         }
-        
-        for(auto x:um)
+
+        vector<vector<string>> result;
+
+        for (auto um_iter: um)
         {
-            answer.push_back(x.second);//iterate the map and push the string to the vector
+            result.push_back(um_iter.second);
         }
-        
-        return answer;
+
+        return result;
     }
 };
