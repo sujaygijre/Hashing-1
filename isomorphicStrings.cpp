@@ -9,20 +9,25 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        if(s.length()!=t.length())// is the lengths don't match then obviously they are not isomorphic strings
+        if (s.length() != t.length())
             return false;
-    unordered_map<char,char> um;
-    unordered_set<char> us;
-        
-        for(int i=0;i<s.length();i++){
-            if (um.find(s[i])==um.end()) { //if character fo string 1 is not present and 
-                if (us.find(t[i])!=us.end()) ////the corresponding character is present in string 2 is present
-                    return false;//then there is a mismatch
-                
-                us.insert(t[i]);//insert the character of the second character 
-                um[s[i]]=t[i];//map character of the first character to the character of the second character
-            } else if (um[s[i]]!=t[i]){ //if the corresponding characters from both the string don't match 
-                return false;
+
+        unordered_map<char, int> um;
+        unordered_set<char> us;
+
+        for (int i=0 ; i<s.length(); i++)
+        {
+            if (um.find(s[i]) == um.end())
+            {   
+                if (us.find(t[i]) != us.end())
+                    return false;
+
+                um[s[i]] = t[i];
+                us.insert(t[i]);
+            }
+            else if (um[s[i]] != t[i])
+            {
+               return false;
             }
         }
         return true;
